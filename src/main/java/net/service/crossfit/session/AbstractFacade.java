@@ -23,7 +23,7 @@ public abstract class AbstractFacade<T> {
     protected abstract EntityManager getEntityManager();
 
     public void create(T entity) {
-        getEntityManager().persist(entity);
+        getEntityManager().merge(entity);
     }
 
     public void edit(T entity) {
@@ -38,6 +38,14 @@ public abstract class AbstractFacade<T> {
         return getEntityManager().find(entityClass, id);
     }
 
+// *****************************************************************
+    
+//    public List<T>getAll() {
+//        return getEntityManager().findAll();
+//    }
+    
+// *****************************************************************   
+    
     public List<T> findAll() {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
